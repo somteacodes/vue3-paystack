@@ -13,4 +13,4 @@ import paystack from "vue3-paystack";
 ```
 
 ## Documentation
-Guide can be found here (https)
+Guide can be found [here] (https)
