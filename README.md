@@ -9,8 +9,37 @@ npm i vue3-paystack
 ```
 ## Usage
 ```javascript
+<template>
+     <paystack
+        buttonClass="'button-class btn btn-primary'"
+        buttonText="Pay Online"
+        :publicKey="publicKey"
+        :email="email"
+        :amount="amount"
+        :reference="reference"
+        :onSuccess="onSuccessfulPayment"
+        :onCanel="onCancelledPayment">
+    </paystack>
+</template>
+
+ <script>
 import paystack from "vue3-paystack";
+
+export default {
+  components: {
+    paystack,
+  },
+}
+  </script>
+ 
 ```
 
 ## Documentation
-Guide can be found [here](https://vue3paystack.netlify.app/)
+A more detailed guide can be found [here](https://vue3paystack.netlify.app/)
+
+## Want to say thanks?
+If this has been helpful, kindly share the link to other and a star on the github repo would be helpful too
+
+
+## License
+Licensed under MIT License. [Click](https://github.com/somteacodes/vue3-paystack/blob/master/LICENSE.md) for details.
