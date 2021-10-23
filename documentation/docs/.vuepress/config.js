@@ -1,4 +1,4 @@
-const pkg = require('../../package.json')
+const pkg = require('../../../package.json')
 module.exports={
     title: `${pkg.name} (${pkg.version})`,
     description: `${pkg.description}`,
