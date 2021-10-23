@@ -11,7 +11,7 @@ export default /*#__PURE__*/defineComponent({
     },
     buttonText: {
       type: String,
-      default: "",
+      default: "Pay Now",
     },
     // payment operations
 
