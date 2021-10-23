@@ -29,8 +29,8 @@ import paystack from "vue3-paystack";
                 :email="email"
                 :amount="amount"
                 :reference="reference"
-                :onSuccess="successPayment"
-                :onCanel="closePayment"
+                :onSuccess="onSuccessfulPayment"
+                :onCanel="onCancelledPayment"
               ></paystack>
 </template>
  <script>
@@ -126,5 +126,6 @@ payWithPaystack(): void
 ``` -->
 
 ## Other Considerations
+This is not an official plugin from [paystack](https://paystack.com/).
 
 You should defintely check out the official [paystack](https://paystack.com/developers) documentation for more information
