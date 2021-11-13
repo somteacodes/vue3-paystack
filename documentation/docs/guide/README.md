@@ -44,8 +44,10 @@ export default {
   data() {
     return{
         publicKey:'pk_test_0000',
-        amount:1000 //Expressed in lowest demonitation
-        email:'somteacodes@gmail.com'
+        amount:1000, //Expressed in lowest demonitation, so 1000kobo is equivalent to 10Naira
+        email:'somteacodes@gmail.com',
+        firstname='Somtea', //optional field remember to pass as a prop of firstname if needed
+        lastname='Codes' //optional field remember to pass as a prop of lastname if needed
     }
   },
 
@@ -91,15 +93,46 @@ export default {
 | `buttonClass`          | `String`   | CSS class names for the button, to style the component       | `""`                                                                    |
 | `buttonText`           | `String`   | Displayed text for the button                                | `"Pay Now"`                                                             |
 | `publicKey` _required_ | `String`   | Public key from your paystack API                            |                                                                         |
-| `email` _required_     | `String`   | required                                                     |                                                                         |
+| `email` _required_     | `String`   | required                                                     |  
+| `firstname`             | `String`   |      | First name to be stored in your receipts|
+| `lastname`             | `String`   |      | Last name to be stored in your receipts|
 | `amount` _required_    | `Number`   | required                                                     |                                                                         |
 | `reference` _required_ | `String`   | a randomly generated code, made up of characters and numbers |                                                                         |
 | `currency`             | `String`   | required                                                     | `"NGN"`                                                                 |
 | `onSuccess`            | `Function` |                                                              | `function() { console.log(response); }`                                 |
 | `onCancel`             | `Function` |                                                              | `function() { console.log("payment closed"); }`                         |
 | `channels`             | `Array`    |                                                              | `function() { return ["card", "bank", "ussd", "qr", "mobile_money"]; }` |
-| `metadata`             | `Object`   |                                                              | `function() { return {}; }`                                             |
+| `metadata`             | `Object`   |                                                              | `{   "custom_fields":[{"display_name":"Cart Items",  "variable_name":"Invoice ID", "value":209}] }`                                             |
 | `label`                | `String`   |                                                              | `""`                                                                    |
+
+## Metadata (optional)
+The metadata prop is a good way to add additional information to information stored in your records.
+The meta data is of a JSON type and it has a reserved objecy key called `custom_fields`, that when used correctly displays nicely in your stored receipts. 
+
+Custom fields have 3 keys: `display_name`, `variable_name` and `value`. 
+The display name will be the title for the value when displaying it on your receipts
+
+An example is
+```
+"metadata":{
+   "custom_fields":[
+    {
+      "display_name":"Country",
+      "variable_name":"country_name",
+      "value":"Nigeria"
+    },
+    {
+      "display_name":"Cart Items",
+      "variable_name":"cart_items",
+      "value":"3 bananas, 12 mangoes"
+    }
+  ]
+}
+
+```
+Custom fields used can be seen in your paystack dashboard
+![Image](/images/metadata.png)
+
 
 <!-- ## Data
 
