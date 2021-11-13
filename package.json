@@ -1,6 +1,6 @@
 {
   "name": "vue3-paystack",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Paystack Plugin for Vue 3",
   "main": "dist/vue3-paystack.ssr.js",
   "browser": "dist/vue3-paystack.esm.js",
@@ -12,16 +12,16 @@
   ],
   "sideEffects": false,
   "repository": {
-    "type":"git",
-    "url":"git+https://github.com/somteacodes/vue3-paystack"
+    "type": "git",
+    "url": "git+https://github.com/somteacodes/vue3-paystack"
   },
-  "keywords":[
+  "keywords": [
     "Paystack",
     "Vue",
     "Vue 3",
     "Payment Gateway"
   ],
-  "author":"Anunobi Somto (https://github.com/somteacodes)",
+  "author": "Anunobi Somto (https://github.com/somteacodes)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/somteacodes/vue3-paystack/issues"
@@ -34,7 +34,6 @@
     "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
-    
   },
   "dependencies": {},
   "devDependencies": {
