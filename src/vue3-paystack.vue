@@ -23,6 +23,14 @@ export default /*#__PURE__*/defineComponent({
       type: String,
       required: true,
     }, //required
+     firstname: {
+      type: String,
+      default: "",
+    },
+    lastname: {
+      type: String,
+      default: "",
+    },
     amount: {
       type: Number,
       required: true,
@@ -101,7 +109,9 @@ export default /*#__PURE__*/defineComponent({
         currency: this.currency,
         channels: this.channels,
         metadata: this.metadata,
-        label: this.label,
+        label: this.label,        
+        firstname: this.firstname,
+        lastname: this.lastname,
         onSuccess: (response) => {
           this.onSuccess(response);
         },
