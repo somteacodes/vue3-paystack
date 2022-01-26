@@ -46,8 +46,8 @@ export default {
         publicKey:'pk_test_0000',
         amount:1000, //Expressed in lowest demonitation, so 1000kobo is equivalent to 10Naira
         email:'somteacodes@gmail.com',
-        firstname='Somtea', //optional field remember to pass as a prop of firstname if needed
-        lastname='Codes' //optional field remember to pass as a prop of lastname if needed
+        firstname:'Somtea', //optional field remember to pass as a prop of firstname if needed
+        lastname:'Codes' //optional field remember to pass as a prop of lastname if needed
     }
   },
 
