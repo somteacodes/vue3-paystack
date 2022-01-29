@@ -115,8 +115,8 @@ export default /*#__PURE__*/defineComponent({
         onSuccess: (response) => {
           this.onSuccess(response);
         },
-        onCanel: () => {
-          this.onCanel();
+        onCancel: () => {
+          this.onCancel();
         },
         // onBankTransferConfirmationPending: function(response) {
         //   this.onBankTransferConfirmationPending(response);
