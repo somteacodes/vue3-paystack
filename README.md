@@ -18,7 +18,7 @@ npm i vue3-paystack
         :amount="amount"
         :reference="reference"
         :onSuccess="onSuccessfulPayment"
-        :onCanel="onCancelledPayment">
+        :onCancel="onCancelledPayment">
     </paystack>
 </template>
 
