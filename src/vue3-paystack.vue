@@ -1,9 +1,9 @@
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
-export default /*#__PURE__*/defineComponent({
-  name: 'Vue3Paystack', // vue component name
-   props: {
+export default /*#__PURE__*/ defineComponent({
+  name: "Vue3Paystack", // vue component name
+  props: {
     // styles
     buttonClass: {
       type: String,
@@ -23,7 +23,7 @@ export default /*#__PURE__*/defineComponent({
       type: String,
       required: true,
     }, //required
-     firstname: {
+    firstname: {
       type: String,
       default: "",
     },
@@ -43,27 +43,31 @@ export default /*#__PURE__*/defineComponent({
       type: String,
       default: "NGN",
     },
+    plan: {
+      type: String,
+      default: "",
+    },
     onSuccess: {
       type: Function,
-      default: function(response) {
+      default: function (response) {
         console.log(response);
       },
     },
     onCancel: {
       type: Function,
-      default: function() {
+      default: function () {
         console.log("payment closed");
       },
     },
     channels: {
       type: Array,
-      default: function() {
+      default: function () {
         return ["card", "bank", "ussd", "qr", "mobile_money"];
       },
     },
     metadata: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
       },
     },
@@ -71,31 +75,29 @@ export default /*#__PURE__*/defineComponent({
       type: String,
       default: "",
     },
- 
   },
   async created() {
-    this.mountScript()
-    .then(()=>{
-       this.hasScriptLoaded = true
-    })
+    this.mountScript().then(() => {
+      this.hasScriptLoaded = true;
+    });
   },
   data() {
     return {
-      hasScriptLoaded:false
-    }
+      hasScriptLoaded: false,
+    };
   },
   methods: {
-    async mountScript( ) {
-     return new Promise((res,rej)=>{
+    async mountScript() {
+      return new Promise((res, rej) => {
         const script = document.createElement("script");
-      //  add script source
-      script.setAttribute("src", "https://js.paystack.co/v2/inline.js");
-      script.setAttribute("type", "text/javascript");
-      document.head.appendChild(script);
-      // check if script is ready
-       script.onload=()=>res()
-       script.onerror=()=>rej()
-     })
+        //  add script source
+        script.setAttribute("src", "https://js.paystack.co/v2/inline.js");
+        script.setAttribute("type", "text/javascript");
+        document.head.appendChild(script);
+        // check if script is ready
+        script.onload = () => res();
+        script.onerror = () => rej();
+      });
     },
     payWithPaystack() {
       //  options
@@ -109,9 +111,10 @@ export default /*#__PURE__*/defineComponent({
         currency: this.currency,
         channels: this.channels,
         metadata: this.metadata,
-        label: this.label,        
+        label: this.label,
         firstname: this.firstname,
         lastname: this.lastname,
+        plan: this.plan,
         onSuccess: (response) => {
           this.onSuccess(response);
         },
@@ -140,9 +143,11 @@ export default /*#__PURE__*/defineComponent({
 </script>
 
 <template>
-  <button 
-  :disabled="!hasScriptLoaded"
-  :class="buttonClass" @click="payWithPaystack">
+  <button
+    :disabled="!hasScriptLoaded"
+    :class="buttonClass"
+    @click="payWithPaystack"
+  >
     <span>{{ buttonText }}</span>
   </button>
 </template>
