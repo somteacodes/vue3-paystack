@@ -94,10 +94,10 @@ export default {
 | `buttonText`           | `String`   | Displayed text for the button                                | `"Pay Now"`                                                             |
 | `publicKey` _required_ | `String`   | Public key from your paystack API                            |                                                                         |
 | `email` _required_     | `String`   | required                                                     |  
-| `firstname`             | `String`   |      | First name to be stored in your receipts|
-| `lastname`             | `String`   |      | Last name to be stored in your receipts|
 | `amount` _required_    | `Number`   | required                                                     |                                                                         |
 | `reference` _required_ | `String`   | a randomly generated code, made up of characters and numbers |                                                                         |
+| `firstname`             | `String`   |      | First name to be stored in your receipts|
+| `lastname`             | `String`   |      | Last name to be stored in your receipts|
 | `currency`             | `String`   | required                                                     | `"NGN"`                                                                 |
 | `onSuccess`            | `Function` |                                                              | `function() { console.log(response); }`                                 |
 | `onCancel`             | `Function` |                                                              | `function() { console.log("payment closed"); }`                         |
@@ -105,14 +105,20 @@ export default {
 | `metadata`             | `Object`   |                                                              | `{   "custom_fields":[{"display_name":"Cart Items",  "variable_name":"Invoice ID", "value":209}] }`                                             |
 | `label`                | `String`   |                                                              | `""`                                                                    |
 
-## Metadata (optional)
-The metadata prop is a good way to add additional information to information stored in your records.
-The meta data is of a JSON type and it has a reserved objecy key called `custom_fields`, that when used correctly displays nicely in your stored receipts. 
+## Customization with slot
 
-Custom fields have 3 keys: `display_name`, `variable_name` and `value`. 
+Vue-paystack offers customization of the component using a single `slot`. This provides you the ability to fully customize how the button look to the user. Note that this overrides the `buttonText` props.
+
+## Metadata (optional)
+
+The metadata prop is a good way to add additional information to information stored in your records.
+The meta data is of a JSON type and it has a reserved objecy key called `custom_fields`, that when used correctly displays nicely in your stored receipts.
+
+Custom fields have 3 keys: `display_name`, `variable_name` and `value`.
 The display name will be the title for the value when displaying it on your receipts
 
 An example is
+
 ```
 "metadata":{
    "custom_fields":[
@@ -130,9 +136,9 @@ An example is
 }
 
 ```
+
 Custom fields used can be seen in your paystack dashboard
 ![Image](/images/metadata.png)
-
 
 <!-- ## Data
 
@@ -159,6 +165,7 @@ payWithPaystack(): void
 ``` -->
 
 ## Other Considerations
+
 This is not an official plugin from [paystack](https://paystack.com/).
 
 You should defintely check out the official [paystack](https://paystack.com/developers) documentation for more information

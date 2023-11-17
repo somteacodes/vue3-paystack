@@ -12,7 +12,7 @@ export default defineComponent({
 
 <template>
   <div id="app">
-    <vue3-paystack>
+    <vue3-paystack buttonText="Hello Paynow">
       <slot>
         <img
           style="width: 40px;"
