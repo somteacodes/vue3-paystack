@@ -143,7 +143,9 @@ export default /*#__PURE__*/defineComponent({
   <button 
   :disabled="!hasScriptLoaded"
   :class="buttonClass" @click="payWithPaystack">
-    <span>{{ buttonText }}</span>
+  <slot>
+    {{ buttonText }}
+  </slot>
   </button>
 </template>
 
