@@ -1,9 +1,9 @@
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
-export default /*#__PURE__*/defineComponent({
-  name: 'Vue3Paystack', // vue component name
-   props: {
+export default /*#__PURE__*/ defineComponent({
+  name: "Vue3Paystack", // vue component name
+  props: {
     // styles
     buttonClass: {
       type: String,
@@ -23,7 +23,7 @@ export default /*#__PURE__*/defineComponent({
       type: String,
       required: true,
     }, //required
-     firstname: {
+    firstname: {
       type: String,
       default: "",
     },
@@ -45,25 +45,25 @@ export default /*#__PURE__*/defineComponent({
     },
     onSuccess: {
       type: Function,
-      default: function(response) {
+      default: function (response) {
         console.log(response);
       },
     },
     onCancel: {
       type: Function,
-      default: function() {
+      default: function () {
         console.log("payment closed");
       },
     },
     channels: {
       type: Array,
-      default: function() {
+      default: function () {
         return ["card", "bank", "ussd", "qr", "mobile_money"];
       },
     },
     metadata: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
       },
     },
@@ -71,33 +71,45 @@ export default /*#__PURE__*/defineComponent({
       type: String,
       default: "",
     },
- 
   },
   async created() {
-    this.mountScript()
-    .then(()=>{
-       this.hasScriptLoaded = true
-    })
+    this.mountScript().then(() => {
+      this.hasScriptLoaded = true;
+    });
   },
   data() {
     return {
-      hasScriptLoaded:false
-    }
+      hasScriptLoaded: false,
+      errorMessage: "",
+    };
   },
   methods: {
-    async mountScript( ) {
-     return new Promise((res,rej)=>{
+    async mountScript() {
+      return new Promise((res, rej) => {
         const script = document.createElement("script");
-      //  add script source
-      script.setAttribute("src", "https://js.paystack.co/v2/inline.js");
-      script.setAttribute("type", "text/javascript");
-      document.head.appendChild(script);
-      // check if script is ready
-       script.onload=()=>res()
-       script.onerror=()=>rej()
-     })
+        //  add script source
+        script.setAttribute("src", "https://js.paystack.co/v2/inline.js");
+        script.setAttribute("type", "text/javascript");
+        document.head.appendChild(script);
+        // check if script is ready
+        script.onload = () => res();
+        script.onerror = () => rej();
+      });
+    },
+    validateProps() {
+      // Check for missing required props
+      if (!this.publicKey) return "Paystack Public key prop is missing.";
+      if (!this.email) return "Paying customer email prop is missing.";
+      if (!this.amount) return "Amount prop is missing.";
+      if (!this.reference) return "Reference prop is missing.";
+      return ""; // No errors
     },
     payWithPaystack() {
+      this.errorMessage = this.validateProps();
+      if (this.errorMessage) {
+        // Prevent payment if there's an error
+        return;
+      }
       //  options
       const paymentOptions = {
         // general options
@@ -109,7 +121,7 @@ export default /*#__PURE__*/defineComponent({
         currency: this.currency,
         channels: this.channels,
         metadata: this.metadata,
-        label: this.label,        
+        label: this.label,
         firstname: this.firstname,
         lastname: this.lastname,
         onSuccess: (response) => {
@@ -140,14 +152,29 @@ export default /*#__PURE__*/defineComponent({
 </script>
 
 <template>
-  <button 
-  :disabled="!hasScriptLoaded"
-  :class="buttonClass" @click="payWithPaystack">
-  <slot>
-    {{ buttonText }}
-  </slot>
-  </button>
+  <div>
+    <div @click="payWithPaystack" v-bind="$attrs">
+      <slot>
+        <!-- Fallback button if no slot is provided -->
+        <button :disabled="!hasScriptLoaded" :class="buttonClass">
+          {{ buttonText }}
+        </button>
+      </slot>
+    </div>
+    <p v-if="errorMessage" class="error-text">{{ errorMessage }}</p>
+  </div>
 </template>
 
  
+<style scoped>
+.paystack-container {
+  position: relative;
+  display: inline-block;
+}
 
+.error-text {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+</style>
